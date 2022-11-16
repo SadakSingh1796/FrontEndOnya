@@ -23,7 +23,7 @@ export class AccountService {
         observe: 'response',
       }
     ).pipe(
-     
+
     );
   }
   updateStatus(data: any) {
@@ -40,7 +40,7 @@ export class AccountService {
         observe: 'response',
       }
     ).pipe(
-      
+
     );
   }
   getUserDocument(userId: any) {
@@ -76,14 +76,29 @@ export class AccountService {
     );
   }
   createOnya(data: any) {
-  
+
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer '
     })
+
     return this.httpClient.post("http://34.193.73.75:5000/api/Admin/CreateOnyas", data,
       {
         headers: reqHeader,
+        params: {
+
+        },
+        observe: 'response',
+      }
+    ).pipe(
+    );
+  }
+  getLocation(data:any) {
+    return this.httpClient.get("https://maps.googleapis.com/maps/api/geocode/json?address="+data+"&key=AIzaSyAeao06OKyyoWwqn457y2ZIhxosQvwuwC0",
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
         params: {
 
         },

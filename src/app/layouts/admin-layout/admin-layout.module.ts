@@ -24,6 +24,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {DialogModule} from 'primeng/dialog';
 import { DialogCusDocumentComponent } from 'app/customer/dialog-cus-document/dialog-cus-document.component';
 import { InputSwitchModule } from "primeng/inputswitch";
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { AgmCoreModule } from '@agm/core';
 @NgModule({
   imports: [
     BrowserModule,
@@ -39,7 +41,12 @@ import { InputSwitchModule } from "primeng/inputswitch";
     MatTooltipModule,
     MatDialogModule,
     DialogModule,
-    InputSwitchModule
+    InputSwitchModule,
+    NgxSpinnerModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyArEmz3j2sLeBl3rCRQngoykAZfRxpP4rE',
+      libraries: ['places']
+    })
   ],
   declarations: [
     DashboardComponent,

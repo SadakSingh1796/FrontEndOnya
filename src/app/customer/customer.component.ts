@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OnyaComponent } from 'app/onya/onya.component';
 import { AccountService } from 'app/Service/api.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DialogCusDocumentComponent } from './dialog-cus-document/dialog-cus-document.component';
 
 @Component({
@@ -13,16 +14,19 @@ import { DialogCusDocumentComponent } from './dialog-cus-document/dialog-cus-doc
 export class CustomerComponent implements OnInit {
   _customerList: any = [];
   _userStaus: boolean = false;
-  constructor(private route: Router, private accountService: AccountService) {
+  constructor(private route: Router, private accountService: AccountService,private spinnerService: NgxSpinnerService,) {
     this.getUsers()
   }
 
   getUsers() {
+    this.spinnerService.show();
     this.accountService.getUsers().subscribe({
       next: (result: any) => {
         this._customerList = result.body.data
+        this.spinnerService.hide();
       },
       error: (result: any) => {
+        this.spinnerService.hide();
       },
       complete: () => { }
     })
@@ -32,11 +36,14 @@ export class CustomerComponent implements OnInit {
       "userid": id,
       "isverified": dataa.checked
     }
+    this.spinnerService.show();
     this.accountService.updateStatus(data).subscribe({
       next: (result: any) => {
+        this.spinnerService.hide();
         //this._customerList = result.body.data
       },
       error: (result: any) => {
+        this.spinnerService.hide();
       },
       complete: () => { }
     })
@@ -64,5 +71,6 @@ export class CustomerComponent implements OnInit {
     this.showDialog = false;
     this.route.navigate(['/onya']);
     this.route.navigate(['/customer']);
+    window.location.reload();
   }
 }

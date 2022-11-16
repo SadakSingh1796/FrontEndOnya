@@ -9,12 +9,13 @@
                     </div>
                     <input class="input-attachment" type="file" accept=".xlsx" #selectFile
                         (change)="onUpload($event)" />
-                    <button (click)="clearFile();selectFile.click()" class="button" label="Import" 
+                    <button (click)="clearFile();selectFile.click()" label="Import" class="btn btn-grad"
                         style="width: 110px;">Import</button>
-                    <button (click)="createOnyy()" class="button" label="Create Onya"  style="width: 110px;
-                    margin-top: 5px;">Create
+                    <button (click)="createOnyy()" label="Create Onya" class="btn btn-grad" style="width: 110px;">Create
                         Onya</button>
-                    <div class="card-body">
+                    <p-inputSwitch (onChange)="handleChange($event)" [(ngModel)]="_isGoogleMap">
+                    </p-inputSwitch>
+                    <div *ngIf="!_isGoogleMap" class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
@@ -147,6 +148,10 @@
                             </table>
                         </div>
                     </div>
+                    <div >
+                        <div id="map"></div>
+
+                    </div>
                 </div>
             </div>
 
@@ -251,8 +256,8 @@
                                     </div>
                                 </div>
                                 <!--  -->
-                                <div class="row" >
-                                    <div class="col-md-4"*ngIf="false">
+                                <div class="row">
+                                    <div class="col-md-4" *ngIf="false">
                                         <mat-form-field class="example-full-width">
                                             <input matInput [formControlName]="'pickuplong'" placeholder="Pickup Long"
                                                 type="text">
@@ -273,7 +278,7 @@
                                     <div class="col-md-4">
                                         <mat-form-field class="example-full-width">
                                             <input matInput [formControlName]="'pickupaddress'"
-                                                placeholder="Pickup Address" type="text">
+                                                (change)="pickUpaddress()" placeholder="Pickup Address" type="text">
                                         </mat-form-field>
                                     </div>
                                     <div class="col-md-4" *ngIf="false">
@@ -348,7 +353,7 @@
                                 </div>
                                 <!--  -->
                                 <div class="row">
-                                    
+
                                     <div class="col-md-4">
                                         <mat-form-field class="example-full-width">
                                             <input [formControlName]="'amount'" matInput placeholder="Amount"
@@ -394,7 +399,6 @@
     </div>
 
 </p-dialog>
-<div *ngIf="location | async as loc">
-	lat: {{ loc.coords.latitude }} <br>
-  long: {{ loc.coords.longitude }}
-</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

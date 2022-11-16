@@ -11,7 +11,6 @@ export class CreateOnyaComponent implements OnInit {
   _typeOfMemberShip:any=[];
   _validTill:any=[];
   constructor(private formBuilder: FormBuilder,) {
-    debugger
     this._createOnyaForm = this.formBuilder.group({
       userid: new FormControl('', Validators.compose([Validators.required])),
       packagesize: new FormControl('', Validators.compose([Validators.required])),
@@ -40,7 +39,6 @@ export class CreateOnyaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
   }
 
 }
