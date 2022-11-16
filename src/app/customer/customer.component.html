@@ -1,0 +1,91 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header-danger">
+                        <h4 class="card-title ">Customer Table</h4>
+                        <p class="card-category"> Customer Details</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th>
+                                        Email
+                                    </th>
+
+                                    <th>
+                                        Phone
+                                    </th>
+                                    <th>
+                                        Is Mobile Verified
+                                    </th>
+                                    <th>
+                                        Is Email Verified
+                                    </th>
+
+                                    <th>
+                                        User Status
+                                    </th>
+                                    <th>
+                                        View Logs
+                                    </th>
+                                    <th>
+                                        Documents
+                                    </th>
+                                </thead>
+                                <tbody>
+
+                                    <tr *ngFor="let item of _customerList;let i=index">
+                                        <td>
+                                            {{item.userid}}
+                                        </td>
+                                        <td>
+                                            {{item.name}}
+                                        </td>
+                                        <td>
+                                            {{item.email}}
+                                        </td>
+                                        <td>
+                                            {{item.phone}}
+                                        </td>
+                                        <td>
+                                            {{item.ismobileverified?'Yes':'No'}}
+                                        </td>
+                                        <td>
+                                            {{item.isemailverified?'Yes':'No'}}
+                                        </td>
+                                        <td>
+                                            <p-inputSwitch (onChange)="handleChange($event,item.userid)"
+                                                [(ngModel)]="item.isverifiedbyadmin">
+                                            </p-inputSwitch>
+                                        </td>
+                                        <td>
+                                        </td>
+
+                                        <td class="text-primary">
+                                            <!-- <a (click)="openPopUp()">View</a> -->
+                                            <p style="cursor: pointer;" (click)="openPopUp()">View</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-dialog [(visible)]="showDialog" [modal]="true" header="Documents" [draggable]="false"
+    [style]="{width: '40vw'}" [baseZIndex]="10000" (onHide)="closePopUp()">
+    <app-dialog-cus-document></app-dialog-cus-document>
+</p-dialog>

@@ -1,0 +1,22 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- <div (click)="closeDialog()"> <i class="fa fa-times" aria-hidden="true" ></i></div>
+            <button (click)="closeDialog()">Close</button> -->
+            <div class="col-md-12">
+                <div class="card">
+                    <!-- <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Simple Table</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                    </div> -->
+                    <div class="card-body" *ngFor="let item of _documentsList">
+                        
+                        <p>{{item.documentType}}</p>
+                        <img [src]="item.documentValue" width="100" alt="" class="video_error-icon">
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

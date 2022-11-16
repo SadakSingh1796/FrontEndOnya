@@ -1,0 +1,400 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div *ngIf="false" class="card-header card-header-danger">
+                        <h4 class="card-title ">Simple Table</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                    </div>
+                    <input class="input-attachment" type="file" accept=".xlsx" #selectFile
+                        (change)="onUpload($event)" />
+                    <button (click)="clearFile();selectFile.click()" class="button" label="Import" 
+                        style="width: 110px;">Import</button>
+                    <button (click)="createOnyy()" class="button" label="Create Onya"  style="width: 110px;
+                    margin-top: 5px;">Create
+                        Onya</button>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        onyaid
+                                    </th>
+                                    <th>
+                                        userid
+                                    </th>
+                                    <th>
+                                        driverid
+                                    </th>
+                                    <th>
+                                        packagesize
+                                    </th>
+                                    <th>
+                                        packageweight
+                                    </th>
+                                    <th>
+                                        packagetype
+                                    </th>
+                                    <th>
+                                        comments
+                                    </th>
+                                    <th>
+                                        pickupdate
+                                    </th>
+                                    <th>
+                                        pickupaddress
+                                    </th>
+                                    <th>
+                                        dropaddress
+                                    </th>
+                                    <th>
+                                        pickuppoint
+                                    </th>
+                                    <th>
+                                        droppoint
+                                    </th>
+                                    <th>
+                                        pickupslot
+                                    </th>
+                                    <th>
+                                        dropslot
+                                    </th>
+                                    <th>
+                                        receivername
+                                    </th>
+                                    <th>
+                                        receiveremail
+                                    </th>
+                                    <th>
+                                        receiverphone
+                                    </th>
+                                    <th>
+                                        amount
+                                    </th>
+                                    <th>
+                                        cancounter
+                                    </th>
+                                    <th>
+                                        status
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of _onyaList">
+                                        <td>
+                                            {{item.onyaid}}
+                                        </td>
+                                        <td>
+                                            {{item.userid}}
+                                        </td>
+                                        <td>
+                                            {{item.driverid}}
+                                        </td>
+                                        <td>
+                                            {{item.packagesize}}
+                                        </td>
+                                        <td>
+                                            {{item.packageweight}}
+                                        </td>
+                                        <td>
+                                            {{item.packagetype}}
+                                        </td>
+                                        <td>
+                                            {{item.comments}}
+                                        </td>
+                                        <td>
+                                            {{item.pickupdate}}
+                                        </td>
+                                        <td>
+                                            {{item.pickupaddress}}
+                                        </td>
+                                        <td>
+                                            {{item.dropaddress}}
+                                        </td>
+                                        <td>
+                                            {{item.pickuppoint}}
+                                        </td>
+                                        <td>
+                                            {{item.droppoint}}
+                                        </td>
+                                        <td>
+                                            {{item.pickupslot}}
+                                        </td>
+                                        <td>
+                                            {{item.dropslot}}
+                                        </td>
+                                        <td>
+                                            {{item.receivername}}
+                                        </td>
+                                        <td>
+                                            {{item.receiveremail}}
+                                        </td>
+                                        <td>
+                                            {{item.receiverphone}}
+                                        </td>
+                                        <td>
+                                            {{item.amount}}
+                                        </td>
+                                        <td>
+                                            {{item.cancounter}}
+                                        </td>
+                                        <td>
+                                            {{item.status}}
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<p-dialog [(visible)]="showDialog" [modal]="true" header="" [draggable]="false" [style]="{width: '60vw'}"
+    [baseZIndex]="10000" (onHide)="closePopUp()">
+
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title">Create Onya</h4>
+                            <!-- <p class="card-category">Complete your profile</p> -->
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="_createOnyaForm">
+                                <div *ngIf="false" class="row">
+                                    <div class="col-md-5">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Company (disabled)" disabled>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Username">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Email address" type="email">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div *ngIf="false" class="row">
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Fist Name" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Last Name" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div *ngIf="false" class="row">
+                                    <div class="col-md-12">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Adress" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'packagesize'" matInput placeholder="Package Size"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'packageweight'" matInput
+                                                placeholder="Package Weight" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput [formControlName]="'packagetype'" placeholder="Package Type"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'comments'" matInput placeholder="Comments"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'pickupdate'" matInput placeholder="Pickup Date"
+                                                type="date">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="false">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'pickuplat'" matInput placeholder="Pickup Lat"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'status'" matInput placeholder="Status"
+                                                type="number">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="row" >
+                                    <div class="col-md-4"*ngIf="false">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput [formControlName]="'pickuplong'" placeholder="Pickup Long"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'receiveremail'" matInput
+                                                placeholder="Receiver Email" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'receiverphone'" matInput
+                                                placeholder="Receiver Phone" type="number">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput [formControlName]="'pickupaddress'"
+                                                placeholder="Pickup Address" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="false">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput [formControlName]="'droplat'" placeholder="Drop Lat"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="row" *ngIf="false">
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'pickupaddress'" matInput
+                                                placeholder="Pickup Address" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="false">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'droplat'" matInput placeholder="Drop Lat"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="false">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'droplong'" matInput placeholder="Drop Long"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'dropaddress'" matInput placeholder="Drop Address"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'pickuppoint'" matInput placeholder="Pick Oppoint"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'droppoint'" matInput placeholder="Drop Point"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'pickupslot'" matInput placeholder="Pick Upslot"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'dropslot'" matInput placeholder="Drop Slot"
+                                                type="text">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'receivername'" matInput
+                                                placeholder="Receiver Name" type="text">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="row">
+                                    
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'amount'" matInput placeholder="Amount"
+                                                type="number">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="row" *ngIf="false">
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input [formControlName]="'status'" matInput placeholder="Status"
+                                                type="number">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div *ngIf="false" class="row">
+                                    <div class="col-md-12">
+                                        <label>About Me</label>
+                                        <mat-form-field class="example-full-width">
+                                            <textarea matInput
+                                                placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>
+                                        </mat-form-field>
+                                        <!-- <div class="form-group">
+      
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                                <textarea class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <button mat-raised-button type="submit" (click)="submit()"
+                                    class="btn btn-danger pull-right">Create
+                                    Onya </button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</p-dialog>
+<div *ngIf="location | async as loc">
+	lat: {{ loc.coords.latitude }} <br>
+  long: {{ loc.coords.longitude }}
+</div>
