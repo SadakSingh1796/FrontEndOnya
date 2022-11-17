@@ -73,7 +73,7 @@
 
                                         <td class="text-primary">
                                             <!-- <a (click)="openPopUp()">View</a> -->
-                                            <p style="cursor: pointer;" (click)="openPopUp()">View</p>
+                                            <p style="cursor: pointer;" (click)="openPopUp(item.userid)">View</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -85,8 +85,8 @@
         </div>
     </div>
 </div>
-<p-dialog [(visible)]="showDialog" [modal]="true" header="Documents" [draggable]="false"
-    [style]="{width: '40vw'}" [baseZIndex]="10000" (onHide)="closePopUp()">
-    <app-dialog-cus-document></app-dialog-cus-document>
+<p-dialog [(visible)]="showDialog"  header="Documents" [draggable]="false"
+    [style]="{width: '40vw'}"  [baseZIndex]="10000"  [resizable]="false" [closable]='true' (onHide)="closePopUp()">
+    <app-dialog-cus-document [userId]="userId"></app-dialog-cus-document>
 </p-dialog>
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-atom" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

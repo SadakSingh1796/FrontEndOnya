@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { DialogModule } from 'primeng/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { CreateOnyaComponent } from './onya/create-onya/create-onya.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -20,7 +19,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    DialogModule,
     BrowserModule,
     NgxSpinnerModule
   ],

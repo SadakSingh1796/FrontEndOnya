@@ -35,10 +35,11 @@ export class OnyaComponent implements OnInit {
   map: any;
   locationS = 'Amritsar'
   _isGoogleMap: boolean = false;
-  _currentMarkerName: any = ''
+  _currentMarkerName: any = '';
+  _mapOptions: any
   constructor(private accountService: AccountService, private formBuilder: FormBuilder, private route: Router,
     private spinnerService: NgxSpinnerService) {
-
+    this.getMapDetail('asfasd')
 
     this._createOnyaForm = this.formBuilder.group({
       userid: new FormControl(0, Validators.compose([Validators.required])),
@@ -87,7 +88,7 @@ export class OnyaComponent implements OnInit {
     this.spinnerService.show();
     this.accountService.getOnya().subscribe({
       next: (result: any) => {
-        
+
         this._onyaList = result.body.data;
         console.log(this._onyaList);
         this.spinnerService.hide();
@@ -144,7 +145,7 @@ export class OnyaComponent implements OnInit {
 
     this._createOnyaForm
 
-    
+
     const dd = {
       "userid": 1,
       "packagesize": this._createOnyaForm.controls['packagesize'].value,
@@ -195,7 +196,8 @@ export class OnyaComponent implements OnInit {
   private ShowLocation(position: any, map: any): void {
     this.lng = +position.coords.longitude;
     this.lat = +position.coords.latitude;
-    console.log('Latitude' + position.coords.latitude + "longitude -" + position.coords.longitude);
+    this._mapOptions.center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+    console.log('Latitude Sadak' + position.coords.latitude + "longitude -" + position.coords.longitude);
   }
 
   pickUpaddress() {
@@ -210,7 +212,7 @@ export class OnyaComponent implements OnInit {
 
   }
   handleChange(data: any) {
-    
+
 
     if (!this._isGoogleMap) {
       this.googleMap()
@@ -234,183 +236,183 @@ export class OnyaComponent implements OnInit {
       "pickuplat": 30.9881116,
       "pickuplong": 76.5505886
     }]
-    for (let i = 0; i < this._onyaListCopy.length; i++) {
-      this._onyaList
-      var mapOptions = {
-        zoom: 13,
-        center: new google.maps.LatLng(this._onyaListCopy[i].pickuplat, this._onyaListCopy[i].pickuplong),
-        scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-        styles: [
-          {
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "color": "#f5f5f5"
-              }
-            ]
-          },
-          {
-            "elementType": "labels.icon",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "elementType": "labels.text.fill",
-            "stylers": [
-              {
-                "color": "#616161"
-              }
-            ]
-          },
-          {
-            "elementType": "labels.text.stroke",
-            "stylers": [
-              {
-                "color": "#f5f5f5"
-              }
-            ]
-          },
-          {
-            "featureType": "administrative.land_parcel",
-            "elementType": "labels.text.fill",
-            "stylers": [
-              {
-                "color": "#bdbdbd"
-              }
-            ]
-          },
-          {
-            "featureType": "poi",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "color": "#eeeeee"
-              }
-            ]
-          },
-          {
-            "featureType": "poi",
-            "elementType": "labels.text.fill",
-            "stylers": [
-              {
-                "color": "#757575"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.park",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "color": "#e5e5e5"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.park",
-            "elementType": "labels.text.fill",
-            "stylers": [
-              {
-                "color": "#9e9e9e"
-              }
-            ]
-          },
-          {
-            "featureType": "road",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "color": "#ffffff"
-              }
-            ]
-          },
-          {
-            "featureType": "road.arterial",
-            "elementType": "labels.text.fill",
-            "stylers": [
-              {
-                "color": "#757575"
-              }
-            ]
-          },
-          {
-            "featureType": "road.highway",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "color": "#dadada"
-              }
-            ]
-          },
-          {
-            "featureType": "road.highway",
-            "elementType": "labels.text.fill",
-            "stylers": [
-              {
-                "color": "#616161"
-              }
-            ]
-          },
-          {
-            "featureType": "road.local",
-            "elementType": "labels.text.fill",
-            "stylers": [
-              {
-                "color": "#9e9e9e"
-              }
-            ]
-          },
-          {
-            "featureType": "transit.line",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "color": "#e5e5e5"
-              }
-            ]
-          },
-          {
-            "featureType": "transit.station",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "color": "#eeeeee"
-              }
-            ]
-          },
-          {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "color": "#c9c9c9"
-              }
-            ]
-          },
-          {
-            "featureType": "water",
-            "elementType": "labels.text.fill",
-            "stylers": [
-              {
-                "color": "#9e9e9e"
-              }
-            ]
-          }
-        ]
+    this._mapOptions = {
+      zoom: 13,
+      center: new google.maps.LatLng(30.9881116, 76.5505886),
+      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+      styles: [
+        {
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#f5f5f5"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#616161"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#f5f5f5"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.land_parcel",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#bdbdbd"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#eeeeee"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#e5e5e5"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#9e9e9e"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#ffffff"
+            }
+          ]
+        },
+        {
+          "featureType": "road.arterial",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#dadada"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#616161"
+            }
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#9e9e9e"
+            }
+          ]
+        },
+        {
+          "featureType": "transit.line",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#e5e5e5"
+            }
+          ]
+        },
+        {
+          "featureType": "transit.station",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#eeeeee"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#c9c9c9"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#9e9e9e"
+            }
+          ]
+        }
+      ]
 
-      };
-      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    };
+    var map = new google.maps.Map(document.getElementById("map"), this._mapOptions);
+    for (let i = 0; i < this._onyaListCopy.length; i++) {
+      
       this._currentMarkerName = this.generateAlpha(5)
-      console.log('markergenerete'+this._currentMarkerName);
-      this._currentMarkerName = new google.maps.Marker({
-        position: new google.maps.LatLng(this._onyaList[i].pickuplat, this._onyaList[i].pickuplong),
+      console.log('markergenerete' + this._currentMarkerName);
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(this._onyaListCopy[i].pickuplat, this._onyaListCopy[i].pickuplong),
         title: "Hello World!",
-        icon: "/assets/img/mapicon.png",
+        icon: "/assets/img/ic_onya_marker.png",
       });
-      this._currentMarkerName.setMap(map);
+      marker.setMap(map);
     }
     // this._isGoogleMap = !this._isGoogleMap;
     // var myLatlng = new google.maps.LatLng(30.743731, 76.643902);

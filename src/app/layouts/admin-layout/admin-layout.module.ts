@@ -20,12 +20,12 @@ import {MatSelectModule} from '@angular/material/select';
 import { OnyaComponent } from 'app/onya/onya.component';
 import { CustomerComponent } from 'app/customer/customer.component';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatDialogModule} from '@angular/material/dialog';
 import {DialogModule} from 'primeng/dialog';
 import { DialogCusDocumentComponent } from 'app/customer/dialog-cus-document/dialog-cus-document.component';
 import { InputSwitchModule } from "primeng/inputswitch";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -39,7 +39,6 @@ import { AgmCoreModule } from '@agm/core';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
-    MatDialogModule,
     DialogModule,
     InputSwitchModule,
     NgxSpinnerModule,

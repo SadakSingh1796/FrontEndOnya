@@ -14,7 +14,8 @@ import { DialogCusDocumentComponent } from './dialog-cus-document/dialog-cus-doc
 export class CustomerComponent implements OnInit {
   _customerList: any = [];
   _userStaus: boolean = false;
-  constructor(private route: Router, private accountService: AccountService,private spinnerService: NgxSpinnerService,) {
+  userId: any
+  constructor(private route: Router, private accountService: AccountService, private spinnerService: NgxSpinnerService,) {
     this.getUsers()
   }
 
@@ -31,7 +32,7 @@ export class CustomerComponent implements OnInit {
       complete: () => { }
     })
   }
-  handleChange(dataa: any,id:any) {
+  handleChange(dataa: any, id: any) {
     const data = {
       "userid": id,
       "isverified": dataa.checked
@@ -48,8 +49,11 @@ export class CustomerComponent implements OnInit {
       complete: () => { }
     })
   }
-  openPopUp() {
+  openPopUp(userId: any) {
+    this.userId = userId;
     this.showDialog = true;
+    localStorage.removeItem('UserId');
+    localStorage.setItem('UserId',userId);
     // const dialogRef = this.dialog.open(DialogCusDocumentComponent);
 
     // dialogRef.afterClosed().subscribe(result => {
@@ -68,9 +72,7 @@ export class CustomerComponent implements OnInit {
   //   this.dummy='Sadak'
   // }
   closePopUp() {
-    this.showDialog = false;
-    this.route.navigate(['/onya']);
-    this.route.navigate(['/customer']);
+    // this.showDialog = false;
     window.location.reload();
   }
 }

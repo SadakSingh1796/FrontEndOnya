@@ -57,6 +57,20 @@ export class AccountService {
     ).pipe(
     );
   }
+  verifyDocument(data: any) {
+    return this.httpClient.post("http://34.193.73.75:5000/api/Admin/VerifyUserDocuments" , data,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+
+        },
+        observe: 'response',
+      }
+    ).pipe(
+    );
+  }
   getOnya() {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -93,8 +107,8 @@ export class AccountService {
     ).pipe(
     );
   }
-  getLocation(data:any) {
-    return this.httpClient.get("https://maps.googleapis.com/maps/api/geocode/json?address="+data+"&key=AIzaSyAeao06OKyyoWwqn457y2ZIhxosQvwuwC0",
+  getLocation(data: any) {
+    return this.httpClient.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + data + "&key=AIzaSyAeao06OKyyoWwqn457y2ZIhxosQvwuwC0",
       {
         headers: {
           'Content-Type': 'application/json'
