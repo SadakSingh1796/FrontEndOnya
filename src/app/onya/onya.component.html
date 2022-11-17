@@ -9,75 +9,75 @@
                     </div>
                     <input class="input-attachment" type="file" accept=".xlsx" #selectFile
                         (change)="onUpload($event)" />
-                    <button (click)="clearFile();selectFile.click()" label="Import" class="btn btn-grad"
+                    <button (click)="clearFile();selectFile.click()" label="Import" class="btn btn-danger"
                         style="width: 110px;">Import</button>
-                    <button (click)="createOnyy()" label="Create Onya" class="btn btn-grad" style="width: 110px;">Create
+                    <button (click)="createOnyy()" label="Create Onya" class="btn btn-danger" style="width: 110px;">Create
                         Onya</button>
-                    <p-inputSwitch (onChange)="handleChange($event)" [(ngModel)]="_isGoogleMap">
-                    </p-inputSwitch>
-                    <div *ngIf="!_isGoogleMap" class="card-body">
+                    <!-- <p-inputSwitch (onChange)="handleChange($event)" [(ngModel)]="_isGoogleMap">
+                    </p-inputSwitch> -->
+                    <div  class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        onyaid
+                                        OnyaId
                                     </th>
                                     <th>
-                                        userid
+                                        UserId
                                     </th>
                                     <th>
-                                        driverid
+                                        DriverId
                                     </th>
                                     <th>
-                                        packagesize
+                                        PackageSize
                                     </th>
                                     <th>
-                                        packageweight
+                                        PackageWeight
                                     </th>
                                     <th>
-                                        packagetype
+                                        PackageType
                                     </th>
                                     <th>
-                                        comments
+                                        Comments
                                     </th>
                                     <th>
-                                        pickupdate
+                                        PickupDate
                                     </th>
                                     <th>
-                                        pickupaddress
+                                        PickupAddress
                                     </th>
                                     <th>
-                                        dropaddress
+                                        DropaAdress
                                     </th>
                                     <th>
-                                        pickuppoint
+                                        PickupPoint
                                     </th>
                                     <th>
-                                        droppoint
+                                        DropPoint
                                     </th>
                                     <th>
-                                        pickupslot
+                                        PickupSlot
                                     </th>
                                     <th>
-                                        dropslot
+                                        DropSlot
                                     </th>
                                     <th>
-                                        receivername
+                                        ReceiverName
                                     </th>
                                     <th>
-                                        receiveremail
+                                        ReceiverEmail
                                     </th>
                                     <th>
-                                        receiverphone
+                                        ReceiverPhone
                                     </th>
                                     <th>
-                                        amount
+                                        Amount
                                     </th>
                                     <th>
-                                        cancounter
+                                        Cancounter
                                     </th>
                                     <th>
-                                        status
+                                        Status
                                     </th>
                                 </thead>
                                 <tbody>
@@ -148,10 +148,7 @@
                             </table>
                         </div>
                     </div>
-                    <div *ngIf="false">
-                        <div id="map"></div>
-
-                    </div>
+                    
                 </div>
             </div>
 

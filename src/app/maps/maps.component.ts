@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'app/Service/api.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare const google: any;
 
@@ -14,26 +16,49 @@ interface Marker {
   styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit {
-  _onyaListCopy = [{
-    "pickuplat": 30.7514252,
-    "pickuplong": 76.7579126
-  },
-  {
-    "pickuplat": 30.7631255,
-    "pickuplong": 76.67798049999999
+
+  _onyaList: any = [];
+  constructor(private spinnerService: NgxSpinnerService, private accountService: AccountService,) {
+    this.getOnya();
   }
-    , {
-    "pickuplat": 30.800142,
-    "pickuplong": 76.8362439
-  }
-    , {
-    "pickuplat": 30.9881116,
-    "pickuplong": 76.5505886
-  }]
-  constructor() { }
 
   ngOnInit() {
 
+
+
+
+    // var marker = new google.maps.Marker({
+    //   position: myLatlng,
+    //   title: "Current Location",
+    //   icon: "/assets/img/mapicon.png",
+    // });
+    // var marker1 = new google.maps.Marker({
+    //   position: myLatlng1,
+    //   title: "Current Location",
+    //   icon: "/assets/img/mapicon.png",
+    // });
+
+    // To add the marker to the map, call setMap();
+    // marker.setMap(map);
+    // marker1.setMap(map);
+  }
+  getOnya() {
+    this.spinnerService.show();
+    this.accountService.getOnya().subscribe({
+      next: (result: any) => {
+
+        this._onyaList = result.body.data;
+        console.log(this._onyaList);
+        this.spinnerService.hide();
+        this.googleMap()
+      },
+      error: (result: any) => {
+        this.spinnerService.hide();
+      },
+      complete: () => { }
+    })
+  }
+  googleMap() {
     // var myLatlng = new google.maps.LatLng(30.743731, 76.643902);
     // var myLatlng1 = new google.maps.LatLng(30.7514252, 76.7579126);
     var mapOptions = {
@@ -203,8 +228,9 @@ export class MapsComponent implements OnInit {
 
     };
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    for (let i = 0; i < this._onyaListCopy.length; i++) {
-      var myLatlng1 = new google.maps.LatLng(this._onyaListCopy[i].pickuplat, this._onyaListCopy[i].pickuplong);
+    for (let i = 0; i < this._onyaList.length; i++) {
+      console.log(this._onyaList)
+      var myLatlng1 = new google.maps.LatLng(this._onyaList[i].pickuplat, this._onyaList[i].pickuplong);
       var marker1 = new google.maps.Marker({
         position: myLatlng1,
         title: "Current Location",
@@ -214,7 +240,9 @@ export class MapsComponent implements OnInit {
         '<div id="siteNotice">' +
         "</div>" +
         '<div id="bodyContent">' +
-        "<p><b>$50</b>, Offered Amount</b>"
+        "<p><b>$</b>" + this._onyaList[i].amount +
+        '<p>' +"</div>" +
+        "</div>"
         + new Date();
       const infowindow = new google.maps.InfoWindow({
         content: contentString,
@@ -228,22 +256,5 @@ export class MapsComponent implements OnInit {
       });
       marker1.setMap(map);
     }
-
-
-    // var marker = new google.maps.Marker({
-    //   position: myLatlng,
-    //   title: "Current Location",
-    //   icon: "/assets/img/mapicon.png",
-    // });
-    // var marker1 = new google.maps.Marker({
-    //   position: myLatlng1,
-    //   title: "Current Location",
-    //   icon: "/assets/img/mapicon.png",
-    // });
-
-    // To add the marker to the map, call setMap();
-    // marker.setMap(map);
-    // marker1.setMap(map);
   }
-
 }
