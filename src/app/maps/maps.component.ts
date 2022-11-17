@@ -38,7 +38,7 @@ export class MapsComponent implements OnInit {
     // var myLatlng1 = new google.maps.LatLng(30.7514252, 76.7579126);
     var mapOptions = {
       zoom: 13,
-       center: new google.maps.LatLng(30.743731, 76.643902),
+      center: new google.maps.LatLng(30.743731, 76.643902),
       scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
       styles: [
         {
@@ -207,21 +207,37 @@ export class MapsComponent implements OnInit {
       var myLatlng1 = new google.maps.LatLng(this._onyaListCopy[i].pickuplat, this._onyaListCopy[i].pickuplong);
       var marker1 = new google.maps.Marker({
         position: myLatlng1,
-        title: "Hello World!",
+        title: "Current Location",
         icon: "/assets/img/ic_onya_marker.png",
+      });
+      var contentString = '<div id="content">' +
+        '<div id="siteNotice">' +
+        "</div>" +
+        '<div id="bodyContent">' +
+        "<p><b>$50</b>, Offered Amount</b>"
+        + new Date();
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        ariaLabel: "",
+      });
+      marker1.addListener("click", () => {
+        infowindow.open({
+          anchor: marker1,
+          map,
+        });
       });
       marker1.setMap(map);
     }
-   
+
 
     // var marker = new google.maps.Marker({
     //   position: myLatlng,
-    //   title: "Hello World!",
+    //   title: "Current Location",
     //   icon: "/assets/img/mapicon.png",
     // });
     // var marker1 = new google.maps.Marker({
     //   position: myLatlng1,
-    //   title: "Hello World!",
+    //   title: "Current Location",
     //   icon: "/assets/img/mapicon.png",
     // });
 

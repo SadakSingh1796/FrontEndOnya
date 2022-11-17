@@ -15,6 +15,9 @@ export class CustomerComponent implements OnInit {
   _customerList: any = [];
   _userStaus: boolean = false;
   userId: any
+  _documentsList: any;
+  // @Input() userId: any
+  _isVerify: boolean = false;
   constructor(private route: Router, private accountService: AccountService, private spinnerService: NgxSpinnerService,) {
     this.getUsers()
   }
@@ -52,8 +55,9 @@ export class CustomerComponent implements OnInit {
   openPopUp(userId: any) {
     this.userId = userId;
     this.showDialog = true;
-    localStorage.removeItem('UserId');
-    localStorage.setItem('UserId',userId);
+    // localStorage.removeItem('UserId');
+    // localStorage.setItem('UserId', userId);
+    this.getUserDocument();
     // const dialogRef = this.dialog.open(DialogCusDocumentComponent);
 
     // dialogRef.afterClosed().subscribe(result => {
@@ -74,5 +78,35 @@ export class CustomerComponent implements OnInit {
   closePopUp() {
     // this.showDialog = false;
     window.location.reload();
+  }
+  closeDialog() {
+  }
+  getUserDocument() {
+
+    // console.log("Upload Cocument "+ localStorage.getItem('UserId'))
+    this.accountService.getUserDocument(this.userId).subscribe({
+      next: (result: any) => {
+        console.log("DDDD" + result.body.data)
+        this._isVerify = result.body.data.isverified
+        this._documentsList = result.body.data.userDocuments;
+      },
+      error: (result: any) => {
+      },
+      complete: () => { }
+    })
+  }
+  handleChanges(data: any) {
+    const dd = {
+      "userid": parseInt(localStorage.getItem('UserId')),
+      "isverified": this._isVerify
+    }
+    this.accountService.verifyDocument(dd).subscribe({
+      next: (result: any) => {
+        console.log("DDDD" + result.body.data)
+      },
+      error: (result: any) => {
+      },
+      complete: () => { }
+    })
   }
 }
