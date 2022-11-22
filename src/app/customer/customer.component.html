@@ -7,8 +7,36 @@
                         <h4 class="card-title ">Customer Table</h4>
                         <p class="card-category"> Customer Details</p>
                     </div>
-                    <div class="card-body">
+                    <div *ngIf="true">
+                        <p-table [columns]="selectedColumns" [value]="_customerList">
+                            <ng-template pTemplate="caption">
+                                <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                                    selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}"
+                                    placeholder="Choose Columns"></p-multiSelect>
+                            </ng-template>
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th>ID</th>
+                                    <th *ngFor="let col of columns">
+                                        {{col.header}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product let-columns="columns">
+                                <tr>
+                                    <td>{{product.userid}}</td>
+                                    <td *ngFor="let col of columns">
+                                        <div> {{product[col.field]}}</div>
+
+
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    <div *ngIf="false" class="card-body">
                         <div class="table-responsive">
+
                             <table class="table">
                                 <thead class="">
                                     <th>
@@ -85,8 +113,9 @@
         </div>
     </div>
 </div>
-<p-dialog [(visible)]="showDialog"  header="Documents" [draggable]="false"
-    [style]="{width: '40vw'}"  [baseZIndex]="10000"  [resizable]="false" [closable]='true' (onHide)="closePopUp()">
+
+<p-dialog [(visible)]="showDialog" header="Documents" [draggable]="false" [style]="{width: '40vw'}" [baseZIndex]="10000"
+    [resizable]="false" [closable]='true' (onHide)="closePopUp()">
     <!-- <app-dialog-cus-document [userId]="userId"></app-dialog-cus-document> -->
     <div class="main-content">
         <div class="container-fluid">
@@ -94,7 +123,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body" *ngFor="let item of _documentsList">
-    
+
                             <p>{{item.documentType}}</p>
                             <img [src]="item.documentValue" width="100" alt="" class="video_error-icon">
                         </div>
@@ -103,9 +132,11 @@
                         </p-inputSwitch>
                     </div>
                 </div>
-    
+
             </div>
         </div>
     </div>
 </p-dialog>
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-atom" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

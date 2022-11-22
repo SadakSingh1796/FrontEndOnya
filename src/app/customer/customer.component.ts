@@ -1,32 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OnyaComponent } from 'app/onya/onya.component';
 import { AccountService } from 'app/Service/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Product } from './customer';
 import { DialogCusDocumentComponent } from './dialog-cus-document/dialog-cus-document.component';
-
+import { ProductService } from './productservice';
+import * as FileSaver from 'file-saver';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
+  products: Product[];
+
+  cols: any = [
+
+    // { field: 'name', header: 'Name' },
+    // { field: 'email', header: 'Email' },
+    // { field: 'ismobileverified', header: 'Is Mobile Verified' },
+    // { field: 'isemailverified', header: 'Is Email Verified' },
+    // { field: 'isverifiedbyadmin', header: 'User Status' },
+  ];
+
+  _selectedColumns: any[];
   _customerList: any = [];
   _userStaus: boolean = false;
   userId: any
   _documentsList: any;
-  // @Input() userId: any
   _isVerify: boolean = false;
-  constructor(private route: Router, private accountService: AccountService, private spinnerService: NgxSpinnerService,) {
+  _customerColoumns: any = [
+
+  ];
+  constructor(private productService: ProductService, private route: Router, private accountService: AccountService, private spinnerService: NgxSpinnerService,) {
     this.getUsers()
   }
+  ngOnInit(): void {
+    // this.productService.getProductsSmall().then(data => this.products = data);
 
+    // this.cols = [
+    //   { field: 'name', header: 'Name' },
+    //   { field: 'category', header: 'Category' },
+    //   { field: 'quantity', header: 'Quantity' }
+    // ];
+
+    // this._selectedColumns = this.cols;
+  }
   getUsers() {
     this.spinnerService.show();
     this.accountService.getUsers().subscribe({
       next: (result: any) => {
         this._customerList = result.body.data
+        this.cols = [
+          // { field: 'userid', header: 'ID' },
+
+          { field: 'name', header: 'Name' },
+          { field: 'email', header: 'Email' },
+          { field: 'ismobileverified', header: 'Is Mobile Verified' },
+          { field: 'isemailverified', header: 'Is Email Verified' },
+          { field: 'isverifiedbyadmin', header: 'User Status' },
+        ]
+        this._customerColoumns = this.cols
         this.spinnerService.hide();
       },
       error: (result: any) => {
@@ -69,8 +105,7 @@ export class CustomerComponent implements OnInit {
   dummy: any = '';
 
 
-  ngOnInit(): void {
-  }
+
   // openPopUp() {
   //   this.showDialog = true;
   //   this.dummy='Sadak'
@@ -108,5 +143,29 @@ export class CustomerComponent implements OnInit {
       },
       complete: () => { }
     })
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._customerColoumns;
+  }
+
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._customerColoumns = this.cols.filter(col => val.includes(col));
+  }
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.products);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "products");
+    });
+  }
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
 }

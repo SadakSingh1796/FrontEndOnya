@@ -25,7 +25,9 @@ import { DialogCusDocumentComponent } from 'app/customer/dialog-cus-document/dia
 import { InputSwitchModule } from "primeng/inputswitch";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AgmCoreModule } from '@agm/core';
-
+import {TableModule} from 'primeng/table';
+import { ProductService } from 'app/customer/productservice';
+import {MultiSelectModule} from 'primeng/multiselect';
 @NgModule({
   imports: [
     BrowserModule,
@@ -45,7 +47,9 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyArEmz3j2sLeBl3rCRQngoykAZfRxpP4rE',
       libraries: ['places']
-    })
+    }),
+    TableModule,
+    MultiSelectModule
   ],
   declarations: [
     DashboardComponent,
@@ -60,7 +64,8 @@ import { AgmCoreModule } from '@agm/core';
     CustomerComponent,
     DialogCusDocumentComponent
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+  providers: [ProductService]
 })
 
 export class AdminLayoutModule {}
