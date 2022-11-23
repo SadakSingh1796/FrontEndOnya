@@ -7,28 +7,80 @@
                         <h4 class="card-title ">Customer Table</h4>
                         <p class="card-category"> Customer Details</p>
                     </div>
+
                     <div *ngIf="true">
                         <p-table [columns]="selectedColumns" [value]="_customerList">
                             <ng-template pTemplate="caption">
-                                <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
-                                    selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}"
-                                    placeholder="Choose Columns"></p-multiSelect>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns"
+                                            optionLabel="header" selectedItemsLabel="{0} columns selected"
+                                            [style]="{minWidth: '200px'}" placeholder="Choose Columns"></p-multiSelect>
+                                    </div>
+                                    <div  class="col-md-4">
+                                        <button (click)="exportExcel()">Export</button>
+                                        <!-- <mat-form-field appearance="fill">
+                                            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                                                <input matStartDate formControlName="start" placeholder="Start date">
+                                                <input matEndDate formControlName="end" placeholder="End date">
+                                            </mat-date-range-input>
+                                            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-date-range-picker #picker></mat-date-range-picker>
+                                        </mat-form-field> -->
+                                    </div>
+                                </div>
+
+
                             </ng-template>
                             <ng-template pTemplate="header" let-columns>
                                 <tr>
                                     <th>ID</th>
+
                                     <th *ngFor="let col of columns">
                                         {{col.header}}
+                                    </th>
+                                    <th>
+                                        Is Mobile Verified
+                                    </th>
+                                    <th>
+                                        Is Email Verified
+                                    </th>
+                                    <th>
+                                        View Logs
+                                    </th>
+                                    <th>
+                                        User Status
+                                    </th>
+                                    <th>
+                                        Documents
                                     </th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-product let-columns="columns">
                                 <tr>
                                     <td>{{product.userid}}</td>
+
                                     <td *ngFor="let col of columns">
                                         <div> {{product[col.field]}}</div>
+                                    </td>
+                                    <td>
+                                        {{product.ismobileverified?'Yes':'No'}}
+                                    </td>
+                                    <td>
+                                        {{product.isemailverified?'Yes':'No'}}
+                                    </td>
 
-
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="handleChange($event,product.userid)"
+                                            [(ngModel)]="product.isverifiedbyadmin">
+                                        </p-inputSwitch>
+                                    </td>
+                                    <td class="text-primary">
+                                        <!-- <a (click)="openPopUp()">View</a> -->
+                                        <p style="cursor: pointer;" (click)="openPopUp(product.userid)">View</p>
                                     </td>
                                 </tr>
                             </ng-template>

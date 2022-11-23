@@ -28,6 +28,11 @@ import { AgmCoreModule } from '@agm/core';
 import {TableModule} from 'primeng/table';
 import { ProductService } from 'app/customer/productservice';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {CalendarModule} from 'primeng/calendar';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -49,7 +54,12 @@ import {MultiSelectModule} from 'primeng/multiselect';
       libraries: ['places']
     }),
     TableModule,
-    MultiSelectModule
+    MultiSelectModule,
+    CalendarModule,
+    // BrowserAnimationsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    
   ],
   declarations: [
     DashboardComponent,

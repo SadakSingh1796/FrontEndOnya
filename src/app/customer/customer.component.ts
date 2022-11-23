@@ -8,14 +8,19 @@ import { Product } from './customer';
 import { DialogCusDocumentComponent } from './dialog-cus-document/dialog-cus-document.component';
 import { ProductService } from './productservice';
 import * as FileSaver from 'file-saver';
+import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
   products: Product[];
-
+  rangeDates: Date[];
   cols: any = [
 
     // { field: 'name', header: 'Name' },
@@ -58,9 +63,10 @@ export class CustomerComponent implements OnInit {
 
           { field: 'name', header: 'Name' },
           { field: 'email', header: 'Email' },
-          { field: 'ismobileverified', header: 'Is Mobile Verified' },
-          { field: 'isemailverified', header: 'Is Email Verified' },
-          { field: 'isverifiedbyadmin', header: 'User Status' },
+          { field: 'phone', header: 'Phone' },
+          // { field: 'ismobileverified', header: 'Is Mobile Verified' },
+          // { field: 'isemailverified', header: 'Is Email Verified' },
+          // { field: 'isverifiedbyadmin', header: 'User Status' },
         ]
         this._customerColoumns = this.cols
         this.spinnerService.hide();
@@ -111,8 +117,8 @@ export class CustomerComponent implements OnInit {
   //   this.dummy='Sadak'
   // }
   closePopUp() {
-    // this.showDialog = false;
-    window.location.reload();
+    this.showDialog = false;
+    // window.location.reload();
   }
   closeDialog() {
   }
@@ -154,10 +160,10 @@ export class CustomerComponent implements OnInit {
   }
   exportExcel() {
     import("xlsx").then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.products);
+      const worksheet = xlsx.utils.json_to_sheet(this._customerList);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      this.saveAsExcelFile(excelBuffer, "products");
+      this.saveAsExcelFile(excelBuffer, "customer");
     });
   }
   saveAsExcelFile(buffer: any, fileName: string): void {

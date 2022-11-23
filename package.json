@@ -31,6 +31,7 @@
     "@angular/platform-browser-dynamic": "^14.2.5",
     "@angular/platform-server": "14.2.5",
     "@angular/router": "^14.2.5",
+    "@fullcalendar/core": "^4.4.0",
     "ajv": "8.11.0",
     "arrive": "2.4.1",
     "bootstrap": "4.6.1",

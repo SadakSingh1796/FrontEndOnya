@@ -10,6 +10,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { BrowserModule } from '@angular/platform-browser';
 import { CreateOnyaComponent } from './onya/create-onya/create-onya.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -20,7 +21,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     RouterModule,
     AppRoutingModule,
     BrowserModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    CalendarModule
   ],
   declarations: [
     AppComponent,
