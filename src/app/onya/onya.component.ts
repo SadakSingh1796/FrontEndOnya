@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 // import { AccountService } from 'app/Service/api.service';
 import * as XLSX from 'xlsx';
 import { AccountService } from '../Service/api.service';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 declare const google: any;
+import * as FileSaver from 'file-saver';
 interface Marker {
   lat: number;
   lng: number;
@@ -36,7 +37,12 @@ export class OnyaComponent implements OnInit {
   locationS = 'Amritsar'
   _isGoogleMap: boolean = false;
   _currentMarkerName: any = '';
-  _mapOptions: any
+  _mapOptions: any;
+  _customerColoumns: any = [
+
+  ];
+  cols: any = [];
+  
   constructor(private accountService: AccountService, private formBuilder: FormBuilder, private route: Router,
     private spinnerService: NgxSpinnerService) {
     this.getMapDetail('asfasd')
@@ -90,6 +96,21 @@ export class OnyaComponent implements OnInit {
       next: (result: any) => {
 
         this._onyaList = result.body.data;
+        this.cols = [
+          { field: 'packagesize', header: 'Package Size' },
+          { field: 'packagetype', header: 'Package Type' },
+          { field: 'comments', header: 'Comments' },
+          { field: 'pickupdate', header: 'Pickup Date' },
+          { field: 'dropaddress', header: 'Drop Address' },
+          { field: 'pickuppoint', header: 'Pickup Point' },
+          { field: 'droppoint', header: 'Drop Point' },
+          { field: 'pickupslot', header: 'Pickup Slot' },
+          { field: 'receivername', header: 'Receiver Name' },
+          { field: 'receiveremail', header: 'Receiver Email' },
+          { field: 'receiverphone', header: 'Receiver Phone' },
+          { field: 'amount', header: 'Amount' },
+        ]
+        this._customerColoumns = this.cols
         console.log(this._onyaList);
         this.spinnerService.hide();
         this.googleMap()
@@ -140,6 +161,14 @@ export class OnyaComponent implements OnInit {
   }
   createOnyy() {
     this.showDialog = true;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._customerColoumns;
+  }
+
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._customerColoumns = this.cols.filter(col => val.includes(col));
   }
   submit() {
 
@@ -404,7 +433,7 @@ export class OnyaComponent implements OnInit {
     };
     var map = new google.maps.Map(document.getElementById("map"), this._mapOptions);
     for (let i = 0; i < this._onyaListCopy.length; i++) {
-      
+
       this._currentMarkerName = this.generateAlpha(5)
       console.log('markergenerete' + this._currentMarkerName);
       var marker = new google.maps.Marker({
@@ -609,6 +638,22 @@ export class OnyaComponent implements OnInit {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+  }
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this._onyaList);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "onya");
+    });
+  }
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
 }
 
