@@ -17,7 +17,7 @@
                                             optionLabel="header" selectedItemsLabel="{0} columns selected"
                                             [style]="{minWidth: '200px'}" placeholder="Choose Columns"></p-multiSelect>
                                     </div>
-                                    <div  class="col-md-4">
+                                    <div class="col-md-4">
                                         <button (click)="exportExcel()">Export</button>
                                         <!-- <mat-form-field appearance="fill">
                                             <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
@@ -40,6 +40,10 @@
                                     <th *ngFor="let col of columns">
                                         {{col.header}}
                                     </th>
+
+                                    <th>
+                                        Account Created
+                                    </th>
                                     <th>
                                         Is Mobile Verified
                                     </th>
@@ -51,6 +55,9 @@
                                     </th>
                                     <th>
                                         User Status
+                                    </th>
+                                    <th>
+                                        Driver Status
                                     </th>
                                     <th>
                                         Documents
@@ -65,6 +72,9 @@
                                         <div> {{product[col.field]}}</div>
                                     </td>
                                     <td>
+                                        {{product.accountcreated}}
+                                    </td>
+                                    <td>
                                         {{product.ismobileverified?'Yes':'No'}}
                                     </td>
                                     <td>
@@ -75,7 +85,12 @@
                                     </td>
                                     <td>
                                         <p-inputSwitch (onChange)="handleChange($event,product.userid)"
-                                            [(ngModel)]="product.isverifiedbyadmin">
+                                            [(ngModel)]="product.isuserverified">
+                                        </p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="handleChange($event,product.userid)"
+                                            [(ngModel)]="product.isdriververified">
                                         </p-inputSwitch>
                                     </td>
                                     <td class="text-primary">
@@ -176,12 +191,16 @@
                     <div class="card">
                         <div class="card-body" *ngFor="let item of _documentsList">
 
-                            <p>{{item.documentType}}</p>
-                            <img [src]="item.documentValue" width="100" alt="" class="video_error-icon">
+                            <p>{{item.type}}</p>
+                            <img [src]="item.url" width="100" alt="" class="video_error-icon">
+                            <p-inputSwitch (onChange)="handleChanges(item)" [(ngModel)]="item.isverified">
+                            </p-inputSwitch>
+                            <br>
+                            <input type="text" placeholder="Comment" [(ngModel)]="item.comment">
                         </div>
-                        <p>{{_isVerify==true?'Verified':'Not Verified'}}</p>
+                        <!-- <p>{{_isVerify==true?'Verified':'Not Verified'}}</p>
                         <p-inputSwitch (onChange)="handleChanges($event)" [(ngModel)]="_isVerify">
-                        </p-inputSwitch>
+                        </p-inputSwitch> -->
                     </div>
                 </div>
 

@@ -2,18 +2,31 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card"  style="width: 1753px;">
+                <div class="card" style="width: 1753px;">
                     <div *ngIf="false" class="card-header card-header-danger">
                         <h4 class="card-title ">Simple Table</h4>
                         <p class="card-category"> Here is a subtitle for this table</p>
                     </div>
-                    <input class="input-attachment" type="file" accept=".xlsx" #selectFile
-                        (change)="onUpload($event)" />
-                    <button (click)="clearFile();selectFile.click()" label="Import" class="btn btn-danger"
-                        style="width: 110px;">Import</button>
-                    <button (click)="createOnyy()" label="Create Onya" class="btn btn-danger"
-                        style="width: 110px;">Create
-                        Onya</button>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input class="input-attachment" type="file" accept=".xlsx" #selectFile
+                                (change)="onUpload($event)" />
+                            <button (click)="clearFile();selectFile.click()" label="Import" class="btn btn-danger"
+                                style="width: 110px;">Import</button>
+
+                        </div>
+                        <div class="col-md-3"> <button (click)="createOnyy()" label="Create Onya" class="btn btn-danger"
+                                style="width: 150px;">Create
+                                Onya</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button (click)="downloadTemplate()" label="Import" class="btn btn-danger"
+                                style="width: 150px;">DownLoad Example</button>
+                        </div>
+
+
+
+                    </div>
                     <!-- <p-inputSwitch (onChange)="handleChange($event)" [(ngModel)]="_isGoogleMap">
                     </p-inputSwitch> -->
                     <div *ngIf="true">

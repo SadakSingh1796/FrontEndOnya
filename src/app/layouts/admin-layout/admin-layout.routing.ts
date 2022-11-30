@@ -9,6 +9,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { OnyaComponent } from 'app/onya/onya.component';
 import { CustomerComponent } from 'app/customer/customer.component';
+import { BusinessComponent } from 'app/business/business.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -63,4 +64,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
+    { path: 'business',        component: BusinessComponent },
 ];

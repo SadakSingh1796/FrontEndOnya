@@ -8,6 +8,7 @@ import { Observable, tap } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 declare const google: any;
 import * as FileSaver from 'file-saver';
+const TEMPLATE = "assets/file/onya_export_1669381714509.xlsx";
 interface Marker {
   lat: number;
   lng: number;
@@ -247,6 +248,18 @@ export class OnyaComponent implements OnInit {
       this.googleMap()
     }
 
+  }
+  
+  downloadTemplate() {
+    const link = document.createElement('a');
+    link.setAttribute('target', '_self');
+
+    link.setAttribute('href', TEMPLATE);
+    link.setAttribute('download', `add_onya_template.xlsx`);
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   }
   googleMap() {
     this._onyaListCopy = [{

@@ -99,7 +99,17 @@ export class CustomerComponent implements OnInit {
     this.showDialog = true;
     // localStorage.removeItem('UserId');
     // localStorage.setItem('UserId', userId);
-    this.getUserDocument();
+    // this.getUserDocument();
+    this.accountService.getUserDocument(userId).subscribe({
+      next: (result: any) => {
+        console.log("DDDD" + result.body.data)
+        this._isVerify = result.body.data.isverified
+        this._documentsList = result.body.data;
+      },
+      error: (result: any) => {
+      },
+      complete: () => { }
+    })
     // const dialogRef = this.dialog.open(DialogCusDocumentComponent);
 
     // dialogRef.afterClosed().subscribe(result => {
@@ -129,7 +139,7 @@ export class CustomerComponent implements OnInit {
       next: (result: any) => {
         console.log("DDDD" + result.body.data)
         this._isVerify = result.body.data.isverified
-        this._documentsList = result.body.data.userDocuments;
+        this._documentsList = result.body.data;
       },
       error: (result: any) => {
       },
@@ -137,10 +147,13 @@ export class CustomerComponent implements OnInit {
     })
   }
   handleChanges(data: any) {
+    console.log(data)
     const dd = {
-      "userid": parseInt(localStorage.getItem('UserId')),
-      "isverified": this._isVerify
+      "comment":data.comment,
+      "isverified": data.isVerified,
+      "documentid":data.documentid,
     }
+    console.log("RRR" + dd)
     this.accountService.verifyDocument(dd).subscribe({
       next: (result: any) => {
         console.log("DDDD" + result.body.data)

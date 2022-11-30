@@ -32,6 +32,7 @@ import {CalendarModule} from 'primeng/calendar';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { BusinessComponent } from 'app/business/business.component';
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     UpgradeComponent,
     OnyaComponent,
     CustomerComponent,
-    DialogCusDocumentComponent
+    DialogCusDocumentComponent,
+    BusinessComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
   providers: [ProductService]
