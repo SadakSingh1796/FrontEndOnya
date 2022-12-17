@@ -16,9 +16,10 @@
                                         <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns"
                                             optionLabel="header" selectedItemsLabel="{0} columns selected"
                                             [style]="{minWidth: '200px'}" placeholder="Choose Columns"></p-multiSelect>
+                                        <button style="margin-left: 30px !important;" (click)="exportExcel()">Export</button>
                                     </div>
                                     <div class="col-md-4">
-                                        <button (click)="exportExcel()">Export</button>
+
                                         <!-- <mat-form-field appearance="fill">
                                             <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
                                                 <input matStartDate formControlName="start" placeholder="Start date">

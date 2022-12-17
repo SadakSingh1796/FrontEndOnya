@@ -8,24 +8,24 @@
                         <p class="card-category"> Here is a subtitle for this table</p>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                            <input class="input-attachment" style="margin-left: 17px !important;" type="file" accept=".xlsx" #selectFile
-                                (change)="onUpload($event)" />
+                        <div class="col-md-2">
+                            <input class="input-attachment" style="margin-left: 17px !important; margin-top: 11px !important;" type="file"
+                                accept=".xlsx" #selectFile (change)="onUpload($event)" />
+                            <!-- <button (change)="onUpload($event)" #selectFile label="Choose File" class="input-attachment btn btn-danger"
+                                style="margin-left: 17px !important;" type="file" accept=".xlsx">Import</button> -->
+
+                        </div>
+                        <div class="col-md-6">
                             <button (click)="clearFile();selectFile.click()" label="Import" class="btn btn-danger"
                                 style="width: 110px;">Import</button>
-
+                            <button (click)="downloadTemplate()" label="Import" class="btn btn-danger">DownLoad
+                                Example</button>
+                            <button style="width: 150px;" (click)="createOnyy()" label="Create Onya"
+                                class="btn btn-danger">
+                                Create Onya</button>
                         </div>
-                        <div class="col-md-3"> <button (click)="createOnyy()" label="Create Onya" class="btn btn-danger"
-                                style="width: 150px;">Create
-                                Onya</button>
+                        <div class="col-md-4">
                         </div>
-                        <div class="col-md-3">
-                            <button (click)="downloadTemplate()" label="Import" class="btn btn-danger"
-                                style="width: 150px;">DownLoad Example</button>
-                        </div>
-
-
-
                     </div>
                     <!-- <p-inputSwitch (onChange)="handleChange($event)" [(ngModel)]="_isGoogleMap">
                     </p-inputSwitch> -->
@@ -37,9 +37,10 @@
                                         <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns"
                                             optionLabel="header" selectedItemsLabel="{0} columns selected"
                                             [style]="{minWidth: '200px'}" placeholder="Choose Columns"></p-multiSelect>
+                                            <button class="btn btn-danger" style="margin-left: 86px !important; " (click)="exportExcel()">Export</button>
                                     </div>
                                     <div class="col-md-4">
-                                        <button (click)="exportExcel()">Export</button>
+                                      
                                     </div>
                                 </div>
 
