@@ -39,6 +39,8 @@ export class CustomerComponent implements OnInit {
   _customerColoumns: any = [
 
   ];
+  _isFullDetails: boolean = false;
+  _currentUserId: any
   constructor(private productService: ProductService, private route: Router, private accountService: AccountService, private spinnerService: NgxSpinnerService,) {
     this.getUsers()
   }
@@ -149,9 +151,9 @@ export class CustomerComponent implements OnInit {
   handleChanges(data: any) {
     console.log(data)
     const dd = {
-      "comment":data.comment,
+      "comment": data.comment,
       "isverified": data.isVerified,
-      "documentid":data.documentid,
+      "documentid": data.documentid,
     }
     console.log("RRR" + dd)
     this.accountService.verifyDocument(dd).subscribe({
@@ -186,5 +188,9 @@ export class CustomerComponent implements OnInit {
       type: EXCEL_TYPE
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+  customerFullDetails(data: any) {
+    this._isFullDetails = true;
+    this._currentUserId=data
   }
 }

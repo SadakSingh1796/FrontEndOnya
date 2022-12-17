@@ -33,7 +33,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { BusinessComponent } from 'app/business/business.component';
-
+import { TabViewModule } from 'primeng/tabview';
 @NgModule({
   imports: [
     BrowserModule,
@@ -60,7 +60,7 @@ import { BusinessComponent } from 'app/business/business.component';
     // BrowserAnimationsModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    
+    TabViewModule
   ],
   declarations: [
     DashboardComponent,

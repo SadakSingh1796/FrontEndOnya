@@ -9,7 +9,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <input class="input-attachment" type="file" accept=".xlsx" #selectFile
+                            <input class="input-attachment" style="margin-left: 17px !important;" type="file" accept=".xlsx" #selectFile
                                 (change)="onUpload($event)" />
                             <button (click)="clearFile();selectFile.click()" label="Import" class="btn btn-danger"
                                 style="width: 110px;">Import</button>

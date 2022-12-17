@@ -58,7 +58,7 @@ export class AccountService {
     );
   }
   verifyDocument(data: any) {
-    return this.httpClient.post("http://34.193.73.75:5000/api/Admin/VerifyUserDocuments" , data,
+    return this.httpClient.post("http://34.193.73.75:5000/api/Admin/VerifyUserDocuments", data,
       {
         headers: {
           'Content-Type': 'application/json'
@@ -107,6 +107,24 @@ export class AccountService {
     ).pipe(
     );
   }
+  createBusiness(data: any) {
+
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '
+    })
+
+    return this.httpClient.post("http://34.193.73.75:5000/api/Admin/CreateBusinessAccount", data,
+      {
+        headers: reqHeader,
+        params: {
+
+        },
+        observe: 'response',
+      }
+    ).pipe(
+    );
+  }
   getLocation(data: any) {
     return this.httpClient.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + data + "&key=AIzaSyAeao06OKyyoWwqn457y2ZIhxosQvwuwC0",
       {
@@ -119,6 +137,38 @@ export class AccountService {
         observe: 'response',
       }
     ).pipe(
+    );
+  }
+  getBusinessAcc() {
+    return this.httpClient.get("http://34.193.73.75:5000/api/Admin/GetBusinessAccounts",
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+
+        },
+        observe: 'response',
+      }
+    ).pipe(
+    );
+  }
+
+  updateBusinness(data: any) {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '
+    })
+    return this.httpClient.post("http://34.193.73.75:5000/api/Admin/ToggleBusinessAccountRequestModel", data,
+      {
+        headers: reqHeader,
+        params: {
+
+        },
+        observe: 'response',
+      }
+    ).pipe(
+
     );
   }
 }

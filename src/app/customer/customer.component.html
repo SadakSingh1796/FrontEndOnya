@@ -45,6 +45,22 @@
                                         Account Created
                                     </th>
                                     <th>
+                                        Onya created
+                                    </th>
+                                    <th>
+                                        Sender Onya picked (Count)
+                                    </th>
+                                    <th>
+                                        Driver picked (Count)
+                                    </th>
+                                    <th>
+                                        Driver delivered(Count)
+                                    </th>
+                                    <th>
+                                        Sender Onya Created (Count)
+                                    </th>
+
+                                    <th>
                                         Is Mobile Verified
                                     </th>
                                     <th>
@@ -69,10 +85,25 @@
                                     <td>{{product.userid}}</td>
 
                                     <td *ngFor="let col of columns">
-                                        <div> {{product[col.field]}}</div>
+                                        <div (click)="customerFullDetails(product.userid)"> {{product[col.field]}}</div>
                                     </td>
                                     <td>
                                         {{product.accountcreated}}
+                                    </td>
+                                    <td>
+                                        {{product.onyacreated}}
+                                    </td>
+                                    <td>
+                                        {{product.senderonyapicked}}
+                                    </td>
+                                    <td>
+                                        {{product.driverpicked}}
+                                    </td>
+                                    <td>
+                                        {{product.driverdelivered}}
+                                    </td>
+                                    <td>
+                                        {{product.senderonyacreated}}
                                     </td>
                                     <td>
                                         {{product.ismobileverified?'Yes':'No'}}
@@ -207,6 +238,26 @@
             </div>
         </div>
     </div>
+</p-dialog>
+<p-dialog [(visible)]="_isFullDetails" header="Documents" [draggable]="false" [style]="{width: '40vw'}"
+    [baseZIndex]="10000" [resizable]="false" [closable]='true' (onHide)="closePopUp()">
+    <p-tabView>
+
+
+        <p-tabPanel header="Customer Details">
+            <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
+                <div class="innerBox">
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Other Details">
+            <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
+                <div class="innerBox">
+                    No Data
+                </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
 </p-dialog>
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
     <p style="color: white"> Loading... </p>

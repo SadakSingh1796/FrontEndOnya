@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CreateOnyaComponent } from './onya/create-onya/create-onya.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CalendarModule } from 'primeng/calendar';
+import { TabViewModule } from 'primeng/tabview';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -22,7 +23,8 @@ import { CalendarModule } from 'primeng/calendar';
     AppRoutingModule,
     BrowserModule,
     NgxSpinnerModule,
-    CalendarModule
+    CalendarModule,
+    TabViewModule
   ],
   declarations: [
     AppComponent,
