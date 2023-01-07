@@ -49,28 +49,28 @@ export class OnyaComponent implements OnInit {
     this.getMapDetail('asfasd')
 
     this._createOnyaForm = this.formBuilder.group({
-      userid: new FormControl(0, Validators.compose([Validators.required])),
-      packagesize: new FormControl('', Validators.compose([Validators.required])),
-      packageweight: new FormControl('', Validators.compose([Validators.required])),
-      packagetype: new FormControl('', Validators.compose([Validators.required])),
-      comments: new FormControl('', Validators.compose([Validators.required])),
-      pickupdate: new FormControl('', Validators.compose([Validators.required])),
+      userid: new FormControl(0, Validators.compose([])),
+      packagesize: new FormControl('', Validators.compose([])),
+      packageweight: new FormControl('', Validators.compose([])),
+      packagetype: new FormControl('', Validators.compose([])),
+      comments: new FormControl('', Validators.compose([])),
+      pickupdate: new FormControl('', Validators.compose([])),
       pickuplat: new FormControl('', Validators.compose([])),
       pickuplong: new FormControl('', Validators.compose([])),
-      pickupaddress: new FormControl('', Validators.compose([Validators.required])),
+      pickupaddress: new FormControl('', Validators.compose([])),
       droplat: new FormControl('', Validators.compose([])),
       droplong: new FormControl('', Validators.compose([])),
-      dropaddress: new FormControl('', Validators.compose([Validators.required])),
-      pickuppoint: new FormControl('', Validators.compose([Validators.required])),
-      droppoint: new FormControl('', Validators.compose([Validators.required])),
-      pickupslot: new FormControl('', Validators.compose([Validators.required])),
-      dropslot: new FormControl('', Validators.compose([Validators.required])),
-      receivername: new FormControl('', Validators.compose([Validators.required])),
-      receiveremail: new FormControl('', Validators.compose([Validators.required])),
-      receiverphone: new FormControl('', Validators.compose([Validators.required])),
-      amount: new FormControl('', Validators.compose([Validators.required])),
+      dropaddress: new FormControl('', Validators.compose([])),
+      pickuppoint: new FormControl('', Validators.compose([])),
+      droppoint: new FormControl('', Validators.compose([])),
+      pickupslot: new FormControl('', Validators.compose([])),
+      dropslot: new FormControl('', Validators.compose([])),
+      receivername: new FormControl('', Validators.compose([])),
+      receiveremail: new FormControl('', Validators.compose([])),
+      receiverphone: new FormControl('', Validators.compose([])),
+      amount: new FormControl('', Validators.compose([])),
       cancounter: new FormControl(false, Validators.compose([])),
-      status: new FormControl('', Validators.compose([Validators.required])),
+      status: new FormControl('', Validators.compose([])),
       images: new FormControl([], Validators.compose([])),
     });
     this.getOnya();
@@ -201,7 +201,7 @@ export class OnyaComponent implements OnInit {
       "status": 11,
       "images": []
     }
-    if (this._createOnyaForm.valid) {
+    if (true) {
       this.spinnerService.show();
       this.accountService.createOnya([dd]).subscribe({
         next: (result: any) => {
