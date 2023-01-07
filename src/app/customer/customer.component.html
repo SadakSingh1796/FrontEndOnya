@@ -9,14 +9,15 @@
                     </div>
 
                     <div *ngIf="true">
-                        <p-table [columns]="selectedColumns" [value]="_customerList">
+                        <div class="container">        <p-table [columns]="selectedColumns" [value]="_customerList">
                             <ng-template pTemplate="caption">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns"
                                             optionLabel="header" selectedItemsLabel="{0} columns selected"
                                             [style]="{minWidth: '200px'}" placeholder="Choose Columns"></p-multiSelect>
-                                        <button style="margin-left: 30px !important;" (click)="exportExcel()">Export</button>
+                                        <button style="margin-left: 30px !important;"
+                                            (click)="exportExcel()">Export</button>
                                     </div>
                                     <div class="col-md-4">
 
@@ -86,7 +87,8 @@
                                     <td>{{product.userid}}</td>
 
                                     <td *ngFor="let col of columns">
-                                        <div (click)="customerFullDetails(product.userid)"> {{product[col.field]}}</div>
+                                        <div (click)="customerFullDetails(product.userid ,product)">
+                                            {{product[col.field]}}</div>
                                     </td>
                                     <td>
                                         {{product.accountcreated}}
@@ -131,7 +133,8 @@
                                     </td>
                                 </tr>
                             </ng-template>
-                        </p-table>
+                        </p-table></div>
+                 
                     </div>
                     <div *ngIf="false" class="card-body">
                         <div class="table-responsive">
@@ -240,26 +243,70 @@
         </div>
     </div>
 </p-dialog>
-<p-dialog [(visible)]="_isFullDetails" header="Documents" [draggable]="false" [style]="{width: '40vw'}"
-    [baseZIndex]="10000" [resizable]="false" [closable]='true' (onHide)="closePopUp()">
-    <p-tabView>
+<div style="z-index: 10;">
+    <p-dialog [(visible)]="_isFullDetails" header="Documents" [draggable]="false" [style]="{width: '80vw'}"
+        [baseZIndex]="10000" [resizable]="false" [closable]='true' (onHide)="closePopUp()">
+        <p-tabView >
 
 
-        <p-tabPanel header="Customer Details">
-            <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
-                <div class="innerBox">
+            <p-tabPanel header="Customer Details">
+                <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="innerBox">
+                        {{_userDetails.name}}
+                    </div>
                 </div>
-            </div>
-        </p-tabPanel>
-        <p-tabPanel header="Other Details">
-            <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
-                <div class="innerBox">
-                    No Data
+            </p-tabPanel>
+            <p-tabPanel header="Other Details">
+                <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="innerBox">
+                        <table>
+                            <tr>
+                                <th>Package Size</th>
+                                <th>Package Weight</th>
+                                <th>Package Type</th>
+                                <th>Comments</th>
+                                <th>Pickup Date</th>
+                                <th>Pickup Address</th>
+                                <th>Drop Address</th>
+                                <th>Pickup Point</th>
+                                <th>Drop Point</th>
+                                <th>Pickup Slot</th>
+                                <th>Receiver Name</th>
+                                <th>Receiver Email</th>
+                                <th>Receiver Phone</th>
+                                <th>Amount</th>
+                                <th>Cancounter</th>
+                                <th>Status</th>
+                                <th>Driver Status</th>
+                                <th>Owner Name</th>
+                            </tr>
+                            <tr *ngFor="let item of _getUserOnyasList">
+                                <td>{{item.packagesize}}</td>
+                                <td>{{item.packageweight}}</td>
+                                <td>{{item.packagetype}}</td>
+                                <td>{{item.comments}}</td>
+                                <td>{{item.pickupdate}}</td>
+                                <td>{{item.pickupaddress}}</td>
+                                <td>{{item.dropaddress}}</td>
+                                <td>{{item.pickuppoint}}</td>
+                                <td>{{item.droppoint}}</td>
+                                <td>{{item.pickupslot}}</td>
+                                <td>{{item.receivername}}</td>
+                                <td>{{item.receiveremail}}</td>
+                                <td>{{item.receiverphone}}</td>
+                                <td>{{item.amount}}</td>
+                                <td>{{item.cancounter}}</td>
+                                <td>{{item.status}}</td>
+                                <td>{{item.driverstatus}}</td>
+                                <td>{{item.ownername}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </p-tabPanel>
-    </p-tabView>
-</p-dialog>
+            </p-tabPanel>
+        </p-tabView>
+    </p-dialog>
+</div>
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
 </ngx-spinner>

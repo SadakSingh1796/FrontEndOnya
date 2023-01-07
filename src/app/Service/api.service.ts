@@ -171,4 +171,22 @@ export class AccountService {
 
     );
   }
+  GetUserOnyas(user_id: any) {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '
+    })
+    return this.httpClient.get("http://34.193.73.75:5000/api/Admin/GetUserOnyas?userId=" + user_id,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+
+        },
+        observe: 'response',
+      }
+    ).pipe(
+    );
+  }
 }

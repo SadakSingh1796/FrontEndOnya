@@ -41,6 +41,8 @@ export class CustomerComponent implements OnInit {
   ];
   _isFullDetails: boolean = false;
   _currentUserId: any
+  _userDetails: any = [];
+  _getUserOnyasList: any = [];
   constructor(private productService: ProductService, private route: Router, private accountService: AccountService, private spinnerService: NgxSpinnerService,) {
     this.getUsers()
   }
@@ -152,7 +154,7 @@ export class CustomerComponent implements OnInit {
     console.log(data)
     const dd = {
       "comment": data.comment,
-      "isverified": data.isVerified,
+      "isverified": data.isverified,
       "documentid": data.documentid,
     }
     console.log("RRR" + dd)
@@ -189,8 +191,20 @@ export class CustomerComponent implements OnInit {
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
-  customerFullDetails(data: any) {
-    this._isFullDetails = true;
-    this._currentUserId=data
+  customerFullDetails(data: any, fullDetail: any) {
+    this._currentUserId = data
+    this._userDetails = fullDetail;
+    this.accountService.GetUserOnyas(this._currentUserId).subscribe({
+      next: (result: any) => {
+        this._getUserOnyasList = [];
+        console.log("_userDetails" + this._userDetails)
+        console.log("useronyaList" + result.body.data)
+        this._getUserOnyasList = result.body.data;
+        this._isFullDetails = true;
+      },
+      error: (result: any) => {
+      },
+      complete: () => { }
+    })
   }
 }
