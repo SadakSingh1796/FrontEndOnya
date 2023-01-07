@@ -1,33 +1,143 @@
 :host ::ng-deep .p-button {
-    margin: 0 .5rem 0 0;
-    min-width: 10rem;
+  margin: 0 .5rem 0 0;
+  min-width: 10rem;
 }
 
 p {
-    margin: 0;
+  margin: 0;
 }
 
 .confirmation-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 :host ::ng-deep .p-dialog .p-button {
-    min-width: 6rem;
+  min-width: 6rem;
 }
+
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.col {
+  display: flex;
+  gap: 2rem;
+
+  .button {
+    border: none;
+    padding: 0px 1.3rem;
+    transition: background-color 1s ease, border-radius 1s ease-in-out;
+
   }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+
+  .button:hover {
+    color: white;
+    background-color: #f44336;
+    border-radius: 7px;
   }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
+}
+
+
+.parent {
+  ::ng-deep {
+    .p-dialog-mask {
+      z-index: 3;
+    }
   }
+}
+
+
+.tbl {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.tabContainer {
+  .table-responsive {
+    .table {
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+
+      th {
+        font-weight: 600;
+        color: #495057;
+      }
+
+      tbody {
+        tr {
+          td {
+            color: #495057;
+          }
+        }
+      }
+    }
+  }
+}
+
+.innerBox {
+  table {
+    tr {
+      th {
+        // padding: 0.4rem;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+
+
+
+
+.down_side {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+
+}
+
+.radio {
+  ::ng-deep {
+    p-inputSwitch {
+      margin-top: 2px;
+    }
+  }
+}
+
+.parent2{
+  ::ng-deep .p-dialog .col-lg-6{
+
+  }
+}
+
+// media queries 
+
+@media only screen and (max-width:2100px) {
+  :host::ng-deep .p-dialog {
+    max-width: 960px;
+  }
+}
+
+@media only screen and (max-width:768) {
+
+  .down_side {
+    flex-direction: column;
+
+  }
+}

@@ -1,0 +1,23 @@
+.button {
+    border: none;
+    padding: 0px 1.3rem;
+    transition: background-color 1s ease, border-radius .7s ease-in-out;
+
+}
+
+.button:hover {
+    color: white;
+    background-color: #f44336;
+    border-radius: 7px;
+}
+
+
+.row {
+    display: flex;
+    margin: 1rem 0px 1rem 1rem ;
+
+    .three_buttons {
+        display: flex;
+        gap: 1rem;
+    }
+}
