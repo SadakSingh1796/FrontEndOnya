@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -22,8 +22,8 @@ export const ROUTES: RouteInfo[] = [
   // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
 ];
 export const ROUTES1: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
-  { path: '/customer', title: 'Customer’s Tab', icon: 'person', class: '' },
+  // { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
+  // { path: '/customer', title: 'Customer’s Tab', icon: 'person', class: '' },
   { path: '/onya', title: 'Onya’s Tab', icon: 'dashboard', class: '' },
 
   // { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
@@ -41,18 +41,30 @@ export const ROUTES1: RouteInfo[] = [
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
-
+  menuItems: any = [];
+  menuItems1: any = [];
+  isBusiness: boolean = false;
+  @Input() isBusinessV: boolean = false;
   constructor() {
-
   }
 
   ngOnInit() {
-    if (localStorage.getItem('isBusiness')) {
-      this.menuItems = ROUTES.filter(menuItem => menuItem);
-    } else {
-      this.menuItems = ROUTES1.filter(menuItem => menuItem);
-    }
+
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    debugger
+    localStorage.getItem('isBusiness') == 'true' ? this.isBusiness = true : this.isBusiness = false;
+    this.menuItems = ROUTES1.filter(menuItem => menuItem);
+    this.menuItems1 = ROUTES.filter(menuItem => menuItem);
+    // this.menuItems = [];
+    // this.menuItems1 = [];
+    // if (localStorage.getItem('isBusiness')) {
+    //   this.isBusiness = true;
+    //   this.menuItems = ROUTES1.filter(menuItem => menuItem);
+    // } else {
+    //   this.isBusiness = false;
+    //   this.menuItems1 = ROUTES.filter(menuItem => menuItem);
+    // }
   }
   isMobileMenu() {
     if ($(window).width() > 991) {

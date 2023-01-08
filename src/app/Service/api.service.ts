@@ -189,6 +189,24 @@ export class AccountService {
     ).pipe(
     );
   }
+  GetDeliverOnyas(user_id: any) {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '
+    })
+    return this.httpClient.get("http://34.193.73.75:5000/api/Admin/GetDeliverOnyas?userId=" + user_id,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+
+        },
+        observe: 'response',
+      }
+    ).pipe(
+    );
+  }
   login(data: any) {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',

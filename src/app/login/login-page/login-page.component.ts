@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
   _loginForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private accountService: AccountService,private route: Router,) {
+  _isSubmit: boolean = false;
+  constructor(private formBuilder: FormBuilder, private accountService: AccountService, private route: Router,) {
     this._loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([])),
       password: new FormControl('', Validators.compose([])),
@@ -21,14 +22,20 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
   }
   login() {
+    this._isSubmit = true;
     const data = {
       "email": this._loginForm.controls['email'].value,
       "password": this._loginForm.controls['password'].value
     }
     this.accountService.login(data).subscribe({
       next: (result: any) => {
-        localStorage.setItem('isBusiness', result.body.data.isBusinessAccount)
-        this.route.navigate(['/customer']);
+        if (result.body.isSuccess) {
+          localStorage.setItem('isBusiness', result.body.data.isBusinessAccount)
+          this.route.navigate(['/onya']);
+        }else{
+          alert('Wrong Email And Password')
+        }
+       
       },
       error: (result: any) => {
       },

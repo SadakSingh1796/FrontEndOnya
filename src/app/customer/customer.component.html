@@ -219,110 +219,56 @@
 
 
 <div class="parent2">
-<p-dialog [(visible)]="showDialog" header="Documents" [draggable]="false"   [baseZIndex]="10000"
-    [resizable]="false" [closable]='true' (onHide)="closePopUp()">
-    <!-- [style]="{width: '40vw'}" its inside the dialog box -->
-    <!-- <app-dialog-cus-document [userId]="userId"></app-dialog-cus-document> -->
-    <div class="main-content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 ">
-                    <div class="card">
-                        <div class="card-body col-lg-12 col-md-6 col-sm-12 " *ngFor="let item of _documentsList">
+    <p-dialog [(visible)]="showDialog" header="Documents" [draggable]="false" [baseZIndex]="10000" [resizable]="false"
+        [closable]='true' (onHide)="closePopUp()">
+        <!-- [style]="{width: '40vw'}" its inside the dialog box -->
+        <!-- <app-dialog-cus-document [userId]="userId"></app-dialog-cus-document> -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 ">
+                        <div class="card">
+                            <div class="card-body col-lg-12 col-md-6 col-sm-12 " *ngFor="let item of _documentsList">
 
-                            <p>{{item.type}}</p>
+                                <p>{{item.type}}</p>
 
-                            <img [src]="item.url" width="100" alt="" class="video_error-icon">
+                                <img [src]="item.url" width="100" alt="" class="video_error-icon">
 
-                            <div class="down_side">
-                                <div class="radio">
-                                    <p-inputSwitch (onChange)="handleChanges(item)" [(ngModel)]="item.isverified">
-                                    </p-inputSwitch>
+                                <div class="down_side">
+                                    <div class="radio">
+                                        <p-inputSwitch (onChange)="handleChanges(item)" [(ngModel)]="item.isverified">
+                                        </p-inputSwitch>
+                                    </div>
+
+
+                                    <input class="input_type" type="text" placeholder="Comment"
+                                        [(ngModel)]="item.comment">
+                                    <button (click)="handleChanges(item)">Save Changes</button>
                                 </div>
-
-
-                                <input class="input_type" type="text" placeholder="Comment" [(ngModel)]="item.comment">
                             </div>
-                        </div>
-                        <!-- <p>{{_isVerify==true?'Verified':'Not Verified'}}</p>
+                            <!-- <p>{{_isVerify==true?'Verified':'Not Verified'}}</p>
                         <p-inputSwitch (onChange)="handleChanges($event)" [(ngModel)]="_isVerify">
                         </p-inputSwitch> -->
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
-</p-dialog>
+    </p-dialog>
 </div>
 
 <div class="parent">
 
-    <p-dialog [(visible)]="_isFullDetails" header="Documents" [draggable]="false" [style]="{width: '80vw'}"
-        [baseZIndex]="10000" [resizable]="false" [closable]='true' (onHide)="closePopUp()">
+    <p-dialog [(visible)]="_isFullDetails" [draggable]="false" [style]="{width: '80vw'}" [baseZIndex]="10000"
+        [resizable]="false" [closable]='true' (onHide)="closePopUp()">
         <!--  this is inside the p-dialog tag -->
         <!-- style="width: 80vw; z-index: 2;" -->
         <p-tabView>
 
 
-            <p-tabPanel header="Customer Details">
-                <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
-                    <!-- <div class="innerBox">
-                        {{_userDetails.name}}
-                    </div> -->
-                    <div class="table-responsive">
 
-                        <table class="table">
-                            <thead class="">
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Onya created
-                                </th>
-                                <th>
-                                    Sender Onya picked (Count)
-                                </th>
-                                <th>
-                                    Driver picked (Count)
-                                </th>
-                                <th>
-                                    Driver delivered(Count)
-                                </th>
-                                <th>
-                                    Sender Onya Created (Count)
-                                </th>
-
-                            </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td>
-                                        {{_userDetails.name}}
-                                    </td>
-                                    <td>
-                                        {{_userDetails.onyacreated}}
-                                    </td>
-                                    <td>
-                                        {{_userDetails.senderonyapicked}}
-                                    </td>
-                                    <td>
-                                        {{_userDetails.driverpicked}}
-                                    </td>
-                                    <td>
-                                        {{_userDetails.driverdelivered}}
-                                    </td>
-                                    <td>
-                                        {{_userDetails.senderonyacreated}}
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </p-tabPanel>
-            <p-tabPanel header="Other Details">
+            <p-tabPanel header="User Onyas">
                 <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
 
                     <div class="innerBox">
@@ -348,6 +294,56 @@
                                 <th>Owner Name</th>
                             </tr>
                             <tr *ngFor="let item of _getUserOnyasList">
+                                <td>{{item.packagesize}}</td>
+                                <td>{{item.packageweight}}</td>
+                                <td>{{item.packagetype}}</td>
+                                <td>{{item.comments}}</td>
+                                <td>{{item.pickupdate}}</td>
+                                <td>{{item.pickupaddress}}</td>
+                                <td>{{item.dropaddress}}</td>
+                                <td>{{item.pickuppoint}}</td>
+                                <td>{{item.droppoint}}</td>
+                                <td>{{item.pickupslot}}</td>
+                                <td>{{item.receivername}}</td>
+                                <td>{{item.receiveremail}}</td>
+                                <td>{{item.receiverphone}}</td>
+                                <td>{{item.amount}}</td>
+                                <td>{{item.cancounter}}</td>
+                                <td>{{item.status}}</td>
+                                <td>{{item.driverstatus}}</td>
+                                <td>{{item.ownername}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Delivered Onyas">
+                <div class="tabContainer" data-aos="fade-up" data-aos-duration="1000">
+
+                    <div class="innerBox">
+                        <table style="width: 100%;">
+                            <tr>
+                                <th>Package Size</th>
+                                <th>Package Weight</th>
+                                <th>Package Weight</th>
+                                <th>Comments</th>
+                                <th>Pickup Date</th>
+                                <th>Pickup Address</th>
+                                <th>Drop Address</th>
+                                <th>Pickup Point</th>
+                                <th>Drop Point</th>
+                                <th>Pickup Slot</th>
+                                <th>Receiver Name</th>
+                                <th>Receiver Email</th>
+                                <th>Receiver Phone</th>
+                                <th>Amount</th>
+                                <th>Cancounter</th>
+                                <th>Status</th>
+                                <th>Driver Status</th>
+                                <th>Owner Name</th>
+                            </tr>
+                            <tr *ngFor="let item of _getDeliverOnyasList">
                                 <td>{{item.packagesize}}</td>
                                 <td>{{item.packageweight}}</td>
                                 <td>{{item.packagetype}}</td>

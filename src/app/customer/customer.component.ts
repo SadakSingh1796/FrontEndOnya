@@ -43,6 +43,7 @@ export class CustomerComponent implements OnInit {
   _currentUserId: any
   _userDetails: any = [];
   _getUserOnyasList: any = [];
+  _getDeliverOnyasList: any = [];
   constructor(private productService: ProductService, private route: Router, private accountService: AccountService, private spinnerService: NgxSpinnerService,) {
     this.getUsers()
   }
@@ -166,6 +167,7 @@ export class CustomerComponent implements OnInit {
       },
       complete: () => { }
     })
+    this.showDialog = false;
   }
   @Input() get selectedColumns(): any[] {
     return this._customerColoumns;
@@ -200,6 +202,17 @@ export class CustomerComponent implements OnInit {
         console.log("_userDetails" + this._userDetails)
         console.log("useronyaList" + result.body.data)
         this._getUserOnyasList = result.body.data;
+      },
+      error: (result: any) => {
+      },
+      complete: () => { }
+    })
+    this.accountService.GetDeliverOnyas(this._currentUserId).subscribe({
+      next: (result: any) => {
+        this._getDeliverOnyasList = [];
+        console.log("_userDetails" + this._userDetails)
+        console.log("useronyaList" + result.body.data)
+        this._getDeliverOnyasList = result.body.data;
         this._isFullDetails = true;
       },
       error: (result: any) => {

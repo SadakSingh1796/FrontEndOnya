@@ -3,7 +3,7 @@
         <div class="logo-img">
             <img src="/assets/img/favicon.png" />
         </div>
-        <p  style="color:white;margin-left: 121px;">Onya</p>
+        <p style="color:white;margin-left: 121px;">Onya</p>
     </a>
 </div>
 <div class="sidebar-wrapper" style="background-color:#0F2546;">
@@ -55,8 +55,16 @@
             </li>
         </ul>
     </div>
-    <ul class="nav">
+    <ul class="nav" *ngIf="isBusiness">
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p style="color: white;">{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav" *ngIf="!isBusiness">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems1" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p style="color: white;">{{menuItem.title}}</p>
