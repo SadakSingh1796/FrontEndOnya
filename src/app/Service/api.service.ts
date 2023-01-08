@@ -189,4 +189,21 @@ export class AccountService {
     ).pipe(
     );
   }
+  login(data: any) {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '
+    })
+    return this.httpClient.post("http://34.193.73.75:5000/api/Admin/Login", data,
+      {
+        headers: reqHeader,
+        params: {
+
+        },
+        observe: 'response',
+      }
+    ).pipe(
+
+    );
+  }
 }

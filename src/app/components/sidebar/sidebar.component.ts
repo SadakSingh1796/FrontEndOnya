@@ -21,6 +21,19 @@ export const ROUTES: RouteInfo[] = [
   { path: '/business', title: 'Business', icon: 'library_books', class: '' },
   // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
 ];
+export const ROUTES1: RouteInfo[] = [
+  { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
+  { path: '/customer', title: 'Customer’s Tab', icon: 'person', class: '' },
+  { path: '/onya', title: 'Onya’s Tab', icon: 'dashboard', class: '' },
+
+  // { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
+  // { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
+  // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
+  // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
+  { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
+  // { path: '/notifications', title: 'Notifications', icon: 'notifications', class: '' },
+  // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
+];
 
 @Component({
   selector: 'app-sidebar',
@@ -30,10 +43,16 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    if (localStorage.getItem('isBusiness')) {
+      this.menuItems = ROUTES.filter(menuItem => menuItem);
+    } else {
+      this.menuItems = ROUTES1.filter(menuItem => menuItem);
+    }
   }
   isMobileMenu() {
     if ($(window).width() > 991) {

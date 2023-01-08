@@ -210,6 +210,7 @@ export class OnyaComponent implements OnInit {
           // this.getOnya();
         },
         error: (result: any) => {
+          this.spinnerService.hide();
         },
         complete: () => { }
       })
